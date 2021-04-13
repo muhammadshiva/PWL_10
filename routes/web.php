@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('article/cetak_pdf', [ArticleController::class, 'cetak_pdf']);
 Route::resource('mahasiswa', MahasiswaController::class);
 Route::get('/mahasiswa/nilai/{nim}', [MahasiswaController::class, 'khs'])->name('mahasiswa.khs');
 Route::resource('articles', ArticleController::class);
-Route::get('article/cetak_pdf', [ArticleController::class, 'cetak_pdf']);
