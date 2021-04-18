@@ -38,7 +38,4 @@
     @endforeach
 
 </table>
-<div class="text-center">
-    <a href="{{ route('mahasiswa.printKhs', $mahasiswa->nim) }}" type="button" class="btn btn-danger mt-3">Cetak KHS</a>
-</div>
 @endsection 

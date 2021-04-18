@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use PDF;
 
 class MahasiswaController extends Controller
 {
@@ -181,5 +182,12 @@ class MahasiswaController extends Controller
         Mahasiswa::find($nim)->delete();
         return redirect()->route('mahasiswa.index')
             ->with('success', 'Mahasiswa Berhasil Dihapus');
+    }
+
+    public function print_khs($nim) 
+    {
+        $mahasiswa = Mahasiswa::with('kelas')->where('nim', $nim)->first();
+        $pdf = PDF::loadview('mahasiswa.printKhs', compact('mahasiswa'));
+        return $pdf->stream();
     }
 }
