@@ -66,14 +66,21 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim' => 'required',
             'nama' => 'required',
+            'foto' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
         ]);
+        
+        $image_name = "";
+        if ($request->file('image')) {
+            $image_name = $request->file('image')->store('image', 'public');
+        }
 
         $mahasiswa = new Mahasiswa;
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
         $mahasiswa->jurusan = $request->get('jurusan');
+        $mahasiswa->foto = $image_name;
         // $mahasiswa->save();
 
         $kelas = new Kelas;
@@ -139,11 +146,17 @@ class MahasiswaController extends Controller
             'jurusan' => 'required',
         ]);
 
+        if($mahasiswa->foto && file_exists(storage_path('app/public/' . $mahasiswa->foto))) {
+            \Storage::delete('public/' . $mahasiswa->foto);
+        }
+        $image_name = $request->file('image')->store('images', 'public');
+        $mahasiswa->foto = $image_name;
+
         $mahasiswa = Mahasiswa::with('kelas')->where('nim', $nim)->first();
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
         $mahasiswa->jurusan = $request->get('jurusan');
-        $mahasiswa->save();
+        // $mahasiswa->save();
 
         $kelas = new Kelas;
         $kelas->id = $request->get('kelas');
