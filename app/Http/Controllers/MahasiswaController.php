@@ -142,6 +142,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim' => 'required',
             'nama' => 'required',
+            'foto' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
         ]);
