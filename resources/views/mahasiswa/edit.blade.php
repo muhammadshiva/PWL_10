@@ -32,6 +32,11 @@
                 <input type="text" name="nama" class="form-control" id="nama" value="{{ $mahasiswa->nama }}" aria-describedby="nama" > 
             </div>
             <div class="form-group">
+                <label for="foto">Foto</label>
+                <input type="file" class="form-control" required="required" name="foto" value="{{$mahasiswa->foto}}"></br>
+                <img width="150px" src="{{asset('storage/'.$mahasiswa->foto)}}">
+            </div>
+            <div class="form-group">
                 <label for="kelas">Kelas</label>
                 <select name='kelas' class='form-control'>
                     @foreach($kelas as $kls)
