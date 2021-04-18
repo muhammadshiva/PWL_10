@@ -67,7 +67,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim' => 'required',
             'nama' => 'required',
-            'foto' => 'required',
+            'image' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
         ]);
@@ -143,7 +143,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim' => 'required',
             'nama' => 'required',
-            'foto' => 'required',
+            'image' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
         ]);
@@ -153,7 +153,7 @@ class MahasiswaController extends Controller
             \Storage::delete('public/' . $mahasiswa->foto);
         }
         $mahasiswa->nim = $request->get('nim');
-        $mahasiswa->name = $request->get('nama');
+        $mahasiswa->nama = $request->get('nama');
         $mahasiswa->jurusan = $request->get('jurusan');
         $image_name = $request->file('image')->store('images', 'public');
         $mahasiswa->foto = $image_name;
